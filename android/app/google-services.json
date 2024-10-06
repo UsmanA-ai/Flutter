@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "382464457642",
+    "project_id": "condition-report-go-92d23",
+    "storage_bucket": "condition-report-go-92d23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382464457642:android:f9bc32cfce1aa6caac49d3",
+        "android_client_info": {
+          "package_name": "com.example.condition_report_go"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKsnpeT8zJCo3QuQge92G-bIiRYiZ4LRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
