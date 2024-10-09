@@ -467,7 +467,7 @@ class _SignInScreen extends State<SignInScreen> {
                             );
                           },
                           child: const Text(
-                            "Sign up",
+                            "Login",
                             style: TextStyle(
                               color: Color.fromRGBO(37, 144, 240, 1),
                               fontSize: 16,

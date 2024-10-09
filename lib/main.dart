@@ -1,4 +1,5 @@
 import 'package:condition_report_go/Screens/bedroom1.dart';
+import 'package:condition_report_go/Screens/condition_report.dart';
 import 'package:condition_report_go/StartupScreens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import Firebase core
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: "Condition Report Go",
       debugShowCheckedModeBanner: false,
        // This is your signup screen
-      home: Splashscreen(),
+      home: ConditionReport(),
     );
   }
 }
