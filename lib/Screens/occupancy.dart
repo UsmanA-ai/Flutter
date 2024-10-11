@@ -103,6 +103,18 @@ class _OccupancyState extends State<Occupancy> {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Center(
+                      child: Text(
+                        "Element has been added!",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    backgroundColor: Colors.white,
+                    duration: Duration(seconds: 1),
+                  ),
+                );
               }
             },
             child: const Text(

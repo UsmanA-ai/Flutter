@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:condition_report_go/Screens/condition_report.dart';
@@ -14,6 +15,7 @@ import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Bedroom1 extends StatefulWidget {
   const Bedroom1({super.key});
@@ -26,7 +28,6 @@ class _Bedroom1State extends State<Bedroom1> {
   final TextEditingController _textController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   String barTitle = "New Element";
-
   @override
   void initState() {
     super.initState();
@@ -74,6 +75,19 @@ class _Bedroom1State extends State<Bedroom1> {
       // Capture the current date and time when the image is picked
       DateTime imageDateTime = DateTime.now();
 
+      setState(() {
+        if (cameraIndex == 1) {
+          camera1Images.add(photo.path);
+          camera1ImageDates.add(imageDateTime);
+        } else if (cameraIndex == 2) {
+          camera2Images.add(photo.path);
+          camera2ImageDates.add(imageDateTime);
+        } else if (cameraIndex == 3) {
+          camera3Images.add(photo.path);
+          camera3ImageDates.add(imageDateTime);
+        }
+      });
+
       // Upload the image to Firebase Storage
       final FirebaseStorage _storage = FirebaseStorage.instance;
       final Reference ref = _storage
@@ -87,17 +101,13 @@ class _Bedroom1State extends State<Bedroom1> {
       // Add the image path to the list
       setState(() {
         if (cameraIndex == 1) {
-          camera1Images.add(downloadUrl);
-          camera1ImageDates.add(imageDateTime);
+          camera1Images[camera1Images.length - 1] = downloadUrl;
         } else if (cameraIndex == 2) {
-          camera2Images.add(downloadUrl);
-          camera2ImageDates.add(imageDateTime);
+          camera2Images[camera2Images.length - 1] = downloadUrl;
         } else if (cameraIndex == 3) {
-          camera3Images.add(downloadUrl);
-          camera3ImageDates.add(imageDateTime);
+          camera3Images[camera3Images.length - 1] = downloadUrl;
         }
       });
-
       // Navigate to Outstanding Photos and PhotoStream screens
       List<String> imagePaths;
       List<DateTime> imageDates;
@@ -128,6 +138,7 @@ class _Bedroom1State extends State<Bedroom1> {
           ),
         ),
       );
+      setState(() {});
     } catch (e) {
       if (e is FirebaseException) {
         print('Firebase error: ${e.code}');
@@ -273,111 +284,121 @@ class _Bedroom1State extends State<Bedroom1> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                globalButtons.add(
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Bedroom1()),
-                      );
-                    },
-                    child: Container(
-                      width: 364,
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          top: BorderSide(
-                            width: 0,
-                            color: Color.fromRGBO(253, 253, 253, 1),
-                          ),
-                          bottom: BorderSide(
-                            width: 0,
-                            color: Color.fromRGBO(253, 253, 253, 1),
-                          ),
-                        ),
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Center(
+                      child: Text(
+                        "Element has been added!",
+                        style: TextStyle(color: Colors.black),
                       ),
-                      child: CupertinoFormRow(
-                        padding: EdgeInsets.zero,
-                        prefix: Row(
-                          children: [
-                            Stack(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(13.5),
-                                  child: SvgPicture.asset(
-                                    "assets/images/attachment.svg",
-                                    height: 24,
-                                    width: 24,
-                                    color:
-                                        const Color.fromRGBO(37, 144, 240, 1),
+                    ),
+                    backgroundColor: Colors.white,
+                    duration: Duration(seconds: 1),
+                  ),
+                );
+                Timer(const Duration(seconds: 2), () {
+                  globalButtons.add(
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Bedroom1()),
+                            );
+                          },
+                          child: Container(
+                            width: 364,
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                top: BorderSide(
+                                  width: 0,
+                                  color: Color.fromRGBO(253, 253, 253, 1),
+                                ),
+                                bottom: BorderSide(
+                                  width: 0,
+                                  color: Color.fromRGBO(253, 253, 253, 1),
+                                ),
+                              ),
+                            ),
+                            child: CupertinoFormRow(
+                              padding: EdgeInsets.zero,
+                              prefix: Row(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(13.5),
+                                        child: SvgPicture.asset(
+                                          "assets/images/attachment.svg",
+                                          height: 24,
+                                          width: 24,
+                                          color: const Color.fromRGBO(
+                                              37, 144, 240, 1),
+                                        ),
+                                      ),
+                                      SvgPicture.asset(
+                                        "assets/images/Group 1259.svg",
+                                        height: 50.5,
+                                        width: 50,
+                                        color: const Color.fromRGBO(
+                                            37, 144, 240, 1),
+                                        // color: Colors.red,
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                SvgPicture.asset(
-                                  "assets/images/Group 1259.svg",
-                                  height: 50.5,
-                                  width: 50,
-                                  color: const Color.fromRGBO(37, 144, 240, 1),
-                                  // color: Colors.red,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 20),
-                            Text(
-                              barTitle,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromRGBO(57, 55, 56, 1)),
-                            ),
-                          ],
-                        ),
-                        child: Container(
-                          width: 56,
-                          height: 24,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color.fromRGBO(37, 144, 240, 1),
-                            ),
-                            borderRadius: BorderRadius.circular(6.2),
-                            color: const Color.fromRGBO(37, 144, 240, 0.1),
-                          ),
-                          child: CupertinoButton(
-                            padding: const EdgeInsets.all(0),
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/images/Group 1353.svg",
-                                  height: 10,
-                                  width: 10,
+                                  const SizedBox(width: 20),
+                                  Text(
+                                    barTitle,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color.fromRGBO(57, 55, 56, 1)),
+                                  ),
+                                ],
+                              ),
+                              child: Container(
+                                width: 56,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6.2),
                                   color: const Color.fromRGBO(37, 144, 240, 1),
                                 ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                const SizedBox(
-                                  height: 17,
-                                  child: Text(
-                                    "Add",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(37, 144, 240, 1),
-                                      fontSize: 14,
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300,
+                                child: CupertinoButton(
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () {},
+                                  child: const SizedBox(
+                                    height: 17,
+                                    child: Text(
+                                      "Added",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontSize: 14,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
                     ),
-                  ),
-                );
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ConditionReport()),
+                  );
+                });
               }
             },
             child: const Text(
@@ -437,7 +458,6 @@ class _Bedroom1State extends State<Bedroom1> {
                               ),
                               const SizedBox(height: 5),
                               SizedBox(
-                                // height: 82,
                                 width: 364,
                                 child: Center(
                                   child: DropdownButtonFormField2(
@@ -482,7 +502,6 @@ class _Bedroom1State extends State<Bedroom1> {
                                       contentPadding: const EdgeInsets.only(
                                           right: 16, top: 18, bottom: 18),
                                     ),
-                                    // isExpanded: true,
                                     isDense: true,
                                     style: const TextStyle(
                                       fontSize: 16,
@@ -557,7 +576,7 @@ class _Bedroom1State extends State<Bedroom1> {
                               ),
                               const SizedBox(height: 5),
                               SizedBox(
-                                // height: 82,
+                                // height: 82,f
                                 width: 364,
                                 child: Center(
                                   child: DropdownButtonFormField2(
@@ -876,10 +895,14 @@ class _Bedroom1State extends State<Bedroom1> {
                                                       BorderRadius.circular(
                                                           6.2),
                                                   image: DecorationImage(
-                                                    // image: FileImage(File(
-                                                    //     camera1Images[index])),
-                                                    image: NetworkImage(
-                                                        camera1Images[index]),
+                                                    image: camera1Images[index]
+                                                            .startsWith('http')
+                                                        ? NetworkImage(
+                                                            camera1Images[
+                                                                index])
+                                                        : FileImage(File(
+                                                            camera1Images[
+                                                                index])),
                                                     fit: BoxFit.fill,
                                                   ),
                                                 ),

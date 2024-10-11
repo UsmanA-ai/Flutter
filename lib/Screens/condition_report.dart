@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:condition_report_go/Screens/globals.dart';
-// import 'package:image_picker/image_picker.dart';
 
 class ConditionReport extends StatefulWidget {
   const ConditionReport({super.key});
@@ -884,115 +883,6 @@ class _ConditionReportState extends State<ConditionReport> {
                       const SizedBox(
                         height: 10,
                       ),
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     Navigator.pushReplacement(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => const Bedroom1()),
-                      //     );
-                      //   },
-                      //   child: Container(
-                      //     width: 364,
-                      //     decoration: const BoxDecoration(
-                      //       border: Border(
-                      //         top: BorderSide(
-                      //           width: 0,
-                      //           color: Color.fromRGBO(253, 253, 253, 1),
-                      //         ),
-                      //         bottom: BorderSide(
-                      //           width: 0,
-                      //           color: Color.fromRGBO(253, 253, 253, 1),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     child: CupertinoFormRow(
-                      //       padding: EdgeInsets.zero,
-                      //       prefix: Row(
-                      //         children: [
-                      //           Stack(
-                      //             children: [
-                      //               Padding(
-                      //                 padding: const EdgeInsets.all(13.5),
-                      //                 child: SvgPicture.asset(
-                      //                   "assets/images/attachment.svg",
-                      //                   height: 24,
-                      //                   width: 24,
-                      //                   color: const Color.fromRGBO(
-                      //                       37, 144, 240, 1),
-                      //                 ),
-                      //               ),
-                      //               SvgPicture.asset(
-                      //                 "assets/images/Group 1259.svg",
-                      //                 height: 50.5,
-                      //                 width: 50,
-                      //                 color:
-                      //                     const Color.fromRGBO(37, 144, 240, 1),
-                      //                 // color: Colors.red,
-                      //               ),
-                      //             ],
-                      //           ),
-                      //           const SizedBox(width: 20),
-                      //           Text(
-                      //             barTitle,
-                      //             style: const TextStyle(
-                      //                 fontSize: 16,
-                      //                 fontStyle: FontStyle.normal,
-                      //                 fontWeight: FontWeight.w400,
-                      //                 color: Color.fromRGBO(57, 55, 56, 1)),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //       child: Container(
-                      //         width: 56,
-                      //         height: 24,
-                      //         decoration: BoxDecoration(
-                      //           border: Border.all(
-                      //             color: const Color.fromRGBO(37, 144, 240, 1),
-                      //           ),
-                      //           borderRadius: BorderRadius.circular(6.2),
-                      //           color: const Color.fromRGBO(37, 144, 240, 0.1),
-                      //         ),
-                      //         child: CupertinoButton(
-                      //           padding: const EdgeInsets.all(0),
-                      //           onPressed: () {},
-                      //           child: Row(
-                      //             mainAxisAlignment: MainAxisAlignment.center,
-                      //             children: [
-                      //               SvgPicture.asset(
-                      //                 "assets/images/Group 1353.svg",
-                      //                 height: 10,
-                      //                 width: 10,
-                      //                 color:
-                      //                     const Color.fromRGBO(37, 144, 240, 1),
-                      //               ),
-                      //               const SizedBox(
-                      //                 width: 5,
-                      //               ),
-                      //               const SizedBox(
-                      //                 height: 17,
-                      //                 child: Text(
-                      //                   "Add",
-                      //                   textAlign: TextAlign.center,
-                      //                   style: TextStyle(
-                      //                     color:
-                      //                         Color.fromRGBO(37, 144, 240, 1),
-                      //                     fontSize: 14,
-                      //                     fontStyle: FontStyle.normal,
-                      //                     fontWeight: FontWeight.w300,
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // const SizedBox(
-                      //   height: 10,
-                      // ),
                       Column(
                         children: globalButtons,
                       ),
